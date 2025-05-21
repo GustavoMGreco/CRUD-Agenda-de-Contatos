@@ -9,7 +9,7 @@ def conectar():
         host='localhost',
         user='user',
         password='12345',
-        database='Agenda',
+        database='agenda',
         cursorclass=pymysql.cursors.DictCursor
     )
 
@@ -55,7 +55,7 @@ def excluirContato(id):
 @app.route('/')
 def listar():
     contatos = listarContatos()
-    return render_template('lista.html', contatos=contatos)
+    return render_template('index.html', contatos=contatos)
 
 @app.route('/novo')
 def novoContato():

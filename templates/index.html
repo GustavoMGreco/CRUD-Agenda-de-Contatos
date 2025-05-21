@@ -4,9 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='static/style.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='static/style.css') }}">
 </head>
 <body>
     
+    <h1>Agenda de Contatos</h1>
+    <a href="{{ url_for('novoContato') }}">Novo Contato</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>Email</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for contato in contatos %}
+            <tr>
+                <td>{{ contato.nome }}</td>
+                <td>{{ contato.telefone }}</td>
+                <td>{{ contato.email }}</td>
+                <td>
+                    <a href="{{ url_for('editar', id=contato.id) }}">Editar</a>
+                    <a href="{{ url_for('excluir', id=contato.id) }}" onclick="return confirm('Tem certeza que deseja excluir este contato?')">Excluir</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4">Nenhum contato cadastrado.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
 </body>
 </html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if contato.id %}Editar{% else %}Novo{% endif %}Contato</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='static/style.css') }}">
+</head>
+<body>
+    
+    <h1>{% if contato.id %}Editar{% else %}Novo{% endif %}Contato</h1>
+
+    <form action="{% if contato.id %}{{ url_for('atualizar', id=contato.id) }}{% else %}{{ url_for('adicionar', id=contato.id) }}{% endif %}" method="post">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" value="{{ contato.nome or '' }}" required><br>
+
+        <label for="telefone">Telefone:</label>
+        <input type="text" id="telefone" name="telefone" value="{{ contato.telefone or '' }}" required><br>
+
+        <label for="">Email:</label>
+        <input type="email" id="email" name="email" value="{{ contato.email or '' }}" required><br>
+
+        <button type="submit">{% if contato.id %}Atualizar{% else %}Adicionar{% endif %}</button>
+
+    </form>
+
+    <a href="{{ url_for('listar') }}">Voltar à lista</a>
+
+</body>
+</html>
